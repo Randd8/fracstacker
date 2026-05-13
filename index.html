@@ -3,118 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frac Stacker</title>
+  <title>Frac Stacker | Premium Fractional Silver Collectibles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      background: linear-gradient(135deg, #1799bb 0%, #00597d 100%);
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #f8fafb;
+    body { font-family: 'Montserrat', Arial, sans-serif; background: linear-gradient(135deg,#1799bb,#01557b 100%); color: #e0e0e0; margin: 0; }
+    .utility-bar { background: #050d15; color: #9ca3af; padding: 10px 0; text-align: center; font-size: 1rem; }
+    .utility-bar a { color: #5eb3d1; text-decoration: none; }
+    nav {
+      background: #0a1929; padding: 10px 0 0 0; display: flex; justify-content: center;
     }
-    .main-wrap {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-top: 8vh;
+    nav .nav-inner {
+      display: flex; gap: 38px; align-items: center; font-size: 1.1rem; font-weight: 600;
     }
-    .hero-title {
-      font-size: 2.3rem;
-      letter-spacing: 0.01em;
+    nav a {
+      color: #fff; text-decoration: none; padding: 13px 0 9px 0; border-bottom: 3px solid transparent; transition: border-color .15s;
+    }
+    nav a:hover, nav a.active { border-bottom: 3px solid #35ccdd; color: #73daff; }
+    .hero { background: linear-gradient(92deg, #127191 0%, #0f2744 100%); padding: 60px 0 37px 0; text-align: center; }
+    .hero h1 { font-family: 'Playfair Display',serif; font-size: 2.5rem; margin:0 0 12px 0; font-weight: 800; letter-spacing:.03em; color:#fff; }
+    .hero p { color: #eafff7; font-size: 1.16rem; margin: 0 0 27px 0; }
+    .hero .btn-group { display: flex; gap: 20px; justify-content: center; margin: 18px auto; }
+    .btn { display:inline-block; padding:13px 30px;font-size:1.13rem;border:none;border-radius:31px;background:linear-gradient(92deg,#68f7e9 0%,#278cf6 98%);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 2px 11px rgba(57,199,235,0.08); transition: background .15s, color .15s; cursor: pointer;}
+    .btn:hover, .btn:focus { background: linear-gradient(93deg,#66e99c 0%,#5ad1f3 97%); color: #054e6e; }
+    .btn.learn { background: linear-gradient(92deg,#fed535 0%,#ffa93c 97%); color: #1e284a; }
+    .btn.learn:hover { background:linear-gradient(92deg,#fff1b6,#ffd288 98%); color: #1b232a; }
+    .intro {
       text-align: center;
-      font-weight: 900;
-      margin-bottom: 18px;
-      margin-top: 0;
-      color: #fff;
-      text-shadow: 0 4px 24px rgba(19,42,62,0.14);
-      text-transform: uppercase;
+      padding: 44px 20px 0 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .hero-sub {
-      font-size: 1.14rem;
-      text-align: center;
-      margin: 0 0 33px 0;
-      color: #fff2;
-      letter-spacing: 0.01em;
-      font-weight: 500;
+    .intro h2 {
+      color: #64d3ef; font-size: 2.2rem; margin-bottom: 15px;
     }
-    .button-row {
-      display: flex;
-      gap: 18px;
-      margin-bottom: 36px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .intro p {
+      font-size: 1.14em; color: #eafffb; margin-bottom: 16px; line-height: 1.8;
     }
-    .pill-btn {
-      display: inline-block;
-      padding: 14px 38px;
-      font-size: 1.12em;
-      background: linear-gradient(92deg,#68f7e9 0%,#278cf6 98%);
-      color: #fff;
-      border: none;
-      border-radius: 36px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 2px 11px rgba(57,199,235,0.14);
-      transition: box-shadow .14s, background .18s, color .16s;
-      margin: 0 0 0 0; white-space: nowrap;
+    .product-grid {
+      display: flex; gap: 26px; justify-content: center;
+      margin: 46px 0 44px 0; flex-wrap: wrap;
     }
-    .pill-btn:hover, .pill-btn:focus {
-      background: linear-gradient(93deg,#86e2ab 0%,#62c7f7 97%);
-      color: #2b3645;
+    .product-card {
+      background: #193749; border-radius: 13px; box-shadow: 0 5px 18px rgba(18,36,64,0.08); padding: 33px 25px 27px 25px; text-align: center; width: 320px; min-width:230px; max-width:380px;
+      display: flex; flex-direction: column; align-items: center; position: relative;
     }
-    .pill-btn.gift {
-      background: linear-gradient(92deg,#ffe144,#ffa93c 98%);
-      color: #213044;
+    .product-card .product-badge {
+      position: absolute; top: 16px; left: 50%; transform:translateX(-50%); background: #21c9df; color: #fff;
+      padding: 5px 17px; border-radius: 9px; font-size: 0.87rem; letter-spacing: 0.08em; font-weight: 800; text-transform: uppercase; box-shadow:0 1px 8px #23cefa2a; }
+    .product-card:nth-child(2) .product-badge {
+      background: #ffba22; color: #182944;
     }
-    .pill-btn.gift:hover, .pill-btn.gift:focus {
-      background: linear-gradient(92deg,#ffeaa3,#ffd288 98%);
-      color: #2b3645;
+    .product-card:nth-child(3) .product-badge {
+      background: #47e980; color: #16341a;
     }
-    .pill-btn.club {
-      background: linear-gradient(92deg,#1ee7eb,#2eff6b 98%);
-      color: #215d25;
+    .product-card h3 { font-size: 1.29rem; margin: 37px 0 8px 0; color: #fff7; font-weight: 700; }
+    .product-card p {
+      color: #c5edfd; font-size: 1.09em; margin-bottom: 23px; line-height: 1.65; min-height: 50px;
     }
-    .pill-btn.club:hover, .pill-btn.club:focus {
-      background: linear-gradient(92deg,#6ffe89,#a3f9ef 98%);
-      color: #105522;
-    }
-    .signup-row {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 1.11em;
-      color: #fff;
-      font-weight: 500;
-    }
-    .signup-row a {
-      color: #fff;
-      text-decoration: underline;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    @media (max-width: 500px) {
-      .main-wrap { padding-top: 2vh; }
-      .hero-title { font-size: 1.16rem; }
-      .button-row { flex-direction: column; gap: 12px; }
-      .pill-btn { width: 100%; padding: 11px 0; }
+    .features-section { background: rgba(20,42,60,0.6); border-radius: 10px; padding: 50px 0; margin: 52px auto 40px auto; max-width: 1110px; }
+    .features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 35px; margin: 40px 0 0 0; }
+    .feature-item h3 { color: #64d3ef; font-weight: 800; font-size: 1.17rem; margin-bottom: 9px; }
+    .feature-item p { font-size: 1.07em; color: #eafffd; line-height: 1.68; }
+    .section-main { max-width: 900px; margin:36px auto 0 auto; color:#eafff7; }
+    .section-main h2 { font-size: 1.55em; color: #5eb3d1; font-weight:800;margin-top:42px; margin-bottom:13px; }
+    .section-main ul { list-style:none; padding:0 0 0 0; }
+    .section-main ul li { font-size: 1.08em; color: #caf7ff; margin: 0 0 8px 0; padding-left:21px; position:relative; }
+    .section-main ul li:before { content:'✓ '; position:absolute; left:0; top:1px; color:#5eb3d1; font-weight:900; }
+    .section-main .cta-row { display:flex; gap:13px; margin:40px 0 0 0; justify-content:center; }
+    .section-main .cta-row a { font-size:1.13em; padding:13px 28px; border-radius:31px; font-weight:700; text-decoration:none; background:linear-gradient(92deg,#68f7e9,#278cf6); color:#fff; }
+    .section-main .cta-row a:hover { background:linear-gradient(92deg,#66e99c,#5ad1f3); color:#00355f; }
+    .footer-bar {margin:70px 0 0 0; text-align:center; font-size:1.04em;color:#cef1fb;}
+    .footer-row {display:flex;justify-content:center;gap:25px;margin:24px 0 0 0;font-size:1.01em;}
+    .footer-row span{display:flex;align-items:center;gap:8px;}
+    .footer-bottom {margin:17px 0 24px 0; color:#68e2ee;font-size:0.98em;}
+    @media (max-width:900px) { .features-grid { grid-template-columns: 1fr; }}
+    @media (max-width:600px) {
+      .product-grid { flex-direction:column; gap:22px; }
+      nav .nav-inner { gap:15px; font-size: 0.98em;}
+      .features-section, .section-main { padding:18px; }
+      .footer-row { gap:10px; flex-direction:column;}
     }
   </style>
 </head>
 <body>
-  <div class="main-wrap">
-    <h1 class="hero-title">STACK SILVER ONE GRAM AT A TIME</h1>
-    <div class="hero-sub">Premium handmade 1-gram silver rounds. Tangible value.</div>
-    <div class="button-row">
-      <a href="collection.html" class="pill-btn">Browse Collection</a>
-      <a href="gift.html" class="pill-btn gift">Send a Gram</a>
-      <a href="subscription.html" class="pill-btn club">Monthly Club</a>
+  <div class="utility-bar">🚛 Free Shipping On Orders Over $99! | <a href="tel:800-555-GRAM">Call Us: 800-555-GRAM</a></div>
+  <nav><div class="nav-inner">
+    <a href="#" class="active">Home</a>
+    <a href="#collection">Collection</a>
+    <a href="#deals">Deals</a>
+    <a href="#club">Monthly Club</a>
+    <a href="#gift">Send a Gram</a>
+    <a href="#about">About</a>
+  </div></nav>
+  <section class="hero">
+    <h1>STACK SILVER ONE GRAM AT A TIME</h1>
+    <p>Premium handmade 1-gram silver rounds. Tangible value. Real craftsmanship.</p>
+    <div class="btn-group">
+      <a href="#collection" class="btn">Browse Collection</a>
+      <a href="#about" class="btn learn">Learn More</a>
     </div>
-    <div class="signup-row">Don't wait any longer to get into precious metals. Even a small monthly order adds up quick.<br>
-      <a href="#" id="signup-cta">Sign up for offers and updates here.</a>
+  </section>
+  <section class="intro">
+    <h2>A Different Way to Build Your Stack</h2>
+    <p>We like to think more people would collect precious metals if they knew there were more options. Silver doesn't have to mean buying the same boring bullion everyone else has. At Frac Stacker, we specialize in <strong>fractional silver rounds</strong> with unique designs—from retro 80s/90s nostalgia to ancient artifact aesthetics.</p>
+    <p><strong>Our goal is to help grow and diversify your collection</strong> while providing items we see as keepers—pieces that would be hard to let go of. Pocket pieces you want to show off, maybe trade, but not likely to sell unless the price is way right.</p>
+  </section>
+  <div class="product-grid" id="collection">
+    <div class="product-card">
+      <div class="product-badge">Collection</div>
+      <h3>Frac Stacker</h3>
+      <p>For the serious collector. Build your silver stack with premium fractional rounds. Each piece is crafted with precision and backed by pure silver content.</p>
+      <a href="#collection" class="btn">Browse Collection</a>
     </div>
+    <div class="product-card">
+      <div class="product-badge">Gift</div>
+      <h3>Silver Grams</h3>
+      <p>Send a gram of encouragement, appreciation, or affection. Our gift-ready silver rounds come with thoughtful messaging and beautiful packaging.</p>
+      <a href="#gift" class="btn">Send a Gram</a>
+    </div>
+    <div class="product-card">
+      <div class="product-badge">Monthly</div>
+      <h3>Subscription Box</h3>
+      <p>Random selection of handmade fracs delivered monthly. When new items arrive, you'll get them first. Cancel anytime.</p>
+      <a href="#club" class="btn">Subscribe Now</a>
+    </div>
+  </div>
+  <section class="features-section" id="about">
+    <h2 style="text-align:center; color:#fff; font-size:2.1rem; margin-bottom:21px;">What Makes Frac Stacker Different</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3>Extensive Fractional Options</h3>
+        <p>An ever-expanding catalog of fractional rounds. New designs drop regularly. Limited runs mean certain pieces become collectible.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Handmade Craftsmanship</h3>
+        <p>Most of what we offer is handmade. Each piece has character, slight variations, and artisan touches that make it unique.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Monthly Discovery Club</h3>
+        <p>Subscribers receive curated surprise selections. First access to new releases. Consistent stacking without decision paralysis.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Flash Sales & Volume Discounts</h3>
+        <p>Larger orders get discounted. Flash sales offer exclusive access. The more you stack, the better your cost-per-gram becomes.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section-main">
+    <h2>What's Broken in the Silver Market</h2>
+    <p><b>For seasoned stackers:</b> You've been at this for years. You know your weight, your premiums. But somewhere along the way, the joy of collecting got replaced by spreadsheet tracking. Your stack became a number instead of a collection. Where's the craftsmanship? Where's the piece that makes you smile when you hold it?</p>
+    <p><b>For new stackers:</b> You want to start building a position. You understand why. But every time you look at prices, you hesitate. So you wait. And while you wait, nothing gets stacked.</p>
+    <p><b>The disconnect:</b> Silver stacking has become transactional instead of experiential. It's about ounces and spot prices—but it's lost the soul. The tangible joy of holding something beautiful with a uniqueness owed to the design but also the production techniques involved. The thrill of discovering a new design.</p>
+    <p>And that's exactly why Frac Stacker exists.</p>
+    <h2>A Different Way to Build Your Stack</h2>
+    <p>Instead of forcing large commitments, we specialize in <b>1-gram fractional silver rounds</b>. Handmade. Unique designs. Actual artisan craftsmanship—not cookie-cutter bullion stamped out by the millions.</p>
+    <p>Every piece has weight and value. But instead of overwhelming price tags, you're looking at accessible entry points that let you stack consistently, discover new designs, and <i>actually enjoy</i> the process.</p>
+    <p><b>Think of it this way:</b> Would you rather own a dozen identical rounds... or a curated collection of handmade fractional pieces, each with its own story, aesthetic, and collectible appeal?</p>
+    <h2>Who This Is For</h2>
+    <ul>
+      <li><b>Seasoned Stackers:</b> You want pieces that stand out. That have story. That you'd actually show someone instead of just logging in a spreadsheet. Frac Stacker gives you variety and collectibility without disrupting your core strategy.</li>
+      <li><b>New Stackers:</b> Start small. Build momentum. Stack consistently without the pressure of large purchases. A few grams this week, a few more next month. Before you know it, you've built a position—and enjoyed every step.</li>
+      <li><b>Gift-Givers:</b> Giving silver as a gift symbolizes good fortune, prosperity, purity, and strength, often representing deep respect, affection, and care for the recipient. It is a thoughtful, lasting gesture suitable for milestones like weddings, anniversaries, or new beginnings, symbolizing endurance and a prosperous future.</li>
+    </ul>
+    <h2>What You Get</h2>
+    <ul>
+      <li>Handmade precious metal pieces with unique designs</li>
+      <li>Variety—new designs, limited runs, rotating themes</li>
+      <li>Accessible pricing—stack consistently</li>
+      <li>Monthly discovery (for club members)</li>
+      <li>First access to new releases (club members only)</li>
+      <li>Flash sales & volume discounts</li>
+      <li>Beautiful presentation—for your vault or as a gift</li>
+    </ul>
+    <h2>Why Fractional Makes Sense</h2>
+    <p><b>"Isn't fractional more expensive per ounce?"</b><br>Yes. Premiums are higher on smaller denominations. That's true industry-wide.</p>
+    <p>But here's what that misses:</p>
+    <ul>
+      <li><b>Accessibility beats perfection.</b> Would you rather own zero ounces because the price felt like too much—or own fractional silver because it felt doable?</li>
+      <li><b>Variety has value.</b> Owning different handmade designs is more interesting than identical rounds. Collectability matters. Your level of enjoyment matters.</li>
+      <li><b>Fractional is transactional.</b> The rising cost of precious metals is making it harder to trade in high value bars. Fractional allows for the ease and possibility of everyday transactions in silver.</li>
+      <li><b>Premiums shrink with volume.</b> Flash sales and bulk discounts bring cost down significantly.</li>
+    </ul>
+    <p><b>Bottom line:</b> If you're optimizing purely for cost-per-ounce, traditional heavy weight bullion wins. But if you're optimizing for experience, variety, transactability and easily consistent stacking habits—fractional is unbeatable.</p>
+    <h2>How to Get Started</h2>
+    <div class="cta-row">
+      <a href="#collection">Browse Collection</a>
+      <a href="#club">Join Monthly Club</a>
+      <a href="#gift">Send a Gram</a>
+    </div>
+    <p style="margin:30px 0 0 0; color:#fff;font-weight:700;">Don't wait any longer to get into precious metals. Even a small monthly order adds up quick.</p>
+  </section>
+  <div class="footer-bar">
+    <div class="footer-row">
+      <span>🚛 Free Shipping On orders over $99</span>
+      <span>🎁 Gift Ready Beautiful presentation included</span>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Frac Stacker. All rights reserved.<br>
+    Handmade Fractional Silver | Stack Different</div>
   </div>
 </body>
 </html>
