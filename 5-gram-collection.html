@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Gram Pieces | Frac Stacker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @font-face {
+            font-family: 'TT Ramillas';
+            src: url('fonts/TT-Ramillas-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        body { font-family: 'Montserrat', sans-serif; background: linear-gradient(180deg, #164755 0%, #3a8b9d 100%); color: #e0e8e8; min-height: 100vh; font-size: 18px; line-height: 1.7; }
+        h1, h2, h3 { font-family: 'TT Ramillas', 'Playfair Display', serif; font-weight: 300; color: #ffffff; }
+        h1 { font-size: 2.7em; } h2 { font-size: 2.1em; } h3 { font-size: 1.15em; }
+        .utility-bar { background: #081828; color: #9ca3af; padding: 12px 0; font-size: 15px; text-align: center; }
+        .utility-bar a { color: #7ecbe1; text-decoration: none; }
+        .main-header { background: #ffffff; padding: 0; }
+        .logo-section { text-align: center; padding: 0; background: #ffffff; }
+        .logo-section img { max-width: 88%; height: auto; max-height: 135px; vertical-align: bottom; }
+
+        nav { background: #081828; padding: 12px 0; }
+        nav .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; gap: 35px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: #7ecbe1; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .page-header { background: linear-gradient(90deg, #336666 0%, #3c8da0 100%); padding: 50px 0; text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 12px; }
+        .page-header p { font-size: 16px; color: #d0d0d0; max-width: 700px; margin: 0 auto; }
+        .products-section { padding: 40px 0; }
+        .section-title { font-size: 28px; color: #5eb3d1; margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #164755; text-align: left; }
+        .section-title:first-of-type { margin-top: 0; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, 280px); justify-content: center; gap: 30px; margin-bottom: 40px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .product-item { background: #081828; border: 1px solid #164755; border-radius: 8px; padding: 20px; text-align: center; transition: transform 0.3s, border-color 0.3s; cursor: pointer; width: 280px; box-sizing: border-box; }
+        .product-item:hover { transform: translateY(-5px); border-color: #7ecbe1; }
+        .product-item .img-container { width: 228px; height: 228px; margin: 0 auto 15px; overflow: hidden; border-radius: 6px; background: #081828; position: relative; }
+        .product-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; transition: transform 0.3s ease; }
+        .product-item:hover img { transform: scale(1.15); }
+        .product-item.has-rollover:hover img { transform: none; }
+        .img-container { position: relative; }
+        .img-container img.main-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+        .img-container img.hover-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; }
+        .product-item:hover .img-container img.main-img { opacity: 0; }
+        .product-item:hover .img-container img.hover-img { opacity: 1; }
+        .product-item h3 { font-size: 16px; margin-bottom: 8px; color: #ffffff; font-weight: 600; }
+        .product-item .price { font-size: 18px; color: #7ecbe1; font-weight: 700; margin-bottom: 10px; }
+        .add-to-cart { background: #d0d0d0; color: #333333; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; width: auto; }
+        .add-to-cart:hover { background: #c0c0c0; }
+        .img-container { cursor: pointer; }
+        .img-container.show-hint::after {
+            content: "Click again to add to cart";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        footer { background: #050d15; text-align: center; padding: 25px; color: #6b7280; font-size: 13px; margin-top: 60px; }
+        @media (max-width: 992px) {
+
+            .page-header h1 { font-size: 32px; }
+            .product-grid { gap: 20px; }
+            .product-item { width: 240px; }
+            .product-item .img-container { width: 188px; height: 188px; }
+        }
+        @media (max-width: 576px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .product-item .img-container { max-width: 280px; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="utility-bar">🚛 Free Shipping On Orders Over $99! | <a href="tel:800-555-GRAM">Call Us: 800-555-GRAM</a></div>
+    <div class="main-header">
+        <div class="logo-section"><a href="index.html"><img src="FSbannerb.png" alt="Frac Stacker"></a></div>
+    </div>
+    <nav>
+        <div class="container-wide">
+            <a href="index.html">Home</a><a href="collections.html" class="active">Collections</a><a href="#deals">Deals</a><a href="#club">Monthly Club</a><a href="#gift">Send a Gram</a><a href="index.html#about">About</a><a href="#">Sign In</a><a href="#">Cart (0)</a>
+        </div>
+    </nav>
+    <div class="page-header">
+        <div class="container">
+            <h1>5 Gram Pieces</h1>
+            <p>Premium fractional silver pieces weighing in at five grams, Pricing is for one piece, multiple pieces are shown to highlight variation in the hand produced items and also include the reverse design.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="products-section">
+            
+            <h2 class="section-title">5g Rounds</h2>
+            <div class="product-grid">
+                <div class="product-item has-rollover">
+                    <div class="img-container">
+                        <img src="images/5gram/5g-lion.jpg" alt="5g Lion" class="main-img">
+                        <img src="images/5gram/5g-lion-hover.jpg" alt="5g Lion reverse" class="hover-img">
+                    </div>
+                    <h3>5g Lion</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item has-rollover">
+                    <div class="img-container">
+                        <img src="images/5gram/5g-exchange.jpg" alt="5g Natures Money" class="main-img">
+                        <img src="images/5gram/5g-natures-money-hover.jpg" alt="5g Natures Money reverse" class="hover-img">
+                    </div>
+                    <h3>5g Natures Money</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item has-rollover">
+                    <div class="img-container">
+                        <img src="images/5gram/5g-lizard.jpg" alt="5g Lizard" class="main-img">
+                        <img src="images/5gram/5g-lizard-hover.jpg" alt="5g Lizard reverse" class="hover-img">
+                    </div>
+                    <h3>5g Lizard</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item has-rollover">
+                    <div class="img-container">
+                        <img src="images/5gram/5g-phoenix.jpg" alt="5g Phoenix" class="main-img">
+                        <img src="images/5gram/5g-phoenix-hover.jpg" alt="5g Phoenix reverse" class="hover-img">
+                    </div>
+                    <h3>5g Phoenix</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item has-rollover">
+                    <div class="img-container">
+                        <img src="images/5gram/5g-sun.jpg" alt="5g Sun" class="main-img">
+                        <img src="images/5gram/5g-sun-hover.jpg" alt="5g Sun reverse" class="hover-img">
+                    </div>
+                    <h3>5g Sun</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">5g Other</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-flamingo.jpg" alt="5g Flamingo"></div>
+                    <h3>5g Flamingo</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-skull-capsule.jpg" alt="5g Skull Capsule"></div>
+                    <h3>5g Skull Capsule</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-skull.jpg" alt="5g Skull"></div>
+                    <h3>5g Skull</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">5g Star Signs</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-aries.jpg" alt="Aries"></div>
+                    <h3>Aries</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-taurus.jpg" alt="Taurus"></div>
+                    <h3>Taurus</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-gemini.jpg" alt="Gemini"></div>
+                    <h3>Gemini</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-cancer.jpg" alt="Cancer"></div>
+                    <h3>Cancer</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-leo.jpg" alt="Leo"></div>
+                    <h3>Leo</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-virgo.jpg" alt="Virgo"></div>
+                    <h3>Virgo</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-libra.jpg" alt="Libra"></div>
+                    <h3>Libra</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-scorpio.jpg" alt="Scorpio"></div>
+                    <h3>Scorpio</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-sagittarius.jpg" alt="Sagittarius"></div>
+                    <h3>Sagittarius</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-capricorn.jpg" alt="Capricorn"></div>
+                    <h3>Capricorn</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-aquarius.jpg" alt="Aquarius"></div>
+                    <h3>Aquarius</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/5gram/5g-pisces.jpg" alt="Pisces"></div>
+                    <h3>Pisces</h3>
+                    <div class="price">$23.95</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Frac Stacker. All rights reserved. | Stack Smart. Stay Fractional.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('.img-container').forEach(container => {
+            container.addEventListener('click', function(e) {
+                if (e.target.closest('.add-to-cart')) return;
+                document.querySelectorAll('.img-container').forEach(c => {
+                    if (c !== this) c.classList.remove('show-hint');
+                });
+                this.classList.toggle('show-hint');
+                setTimeout(() => {
+                    this.classList.remove('show-hint');
+                }, 3000);
+            });
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.img-container')) {
+                document.querySelectorAll('.img-container').forEach(c => {
+                    c.classList.remove('show-hint');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

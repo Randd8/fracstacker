@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Gram Collection | Frac Stacker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: linear-gradient(180deg, #164755 0%, #3a8b9d 100%); color: #e0e8e8; min-height: 100vh; font-size: 18px; line-height: 1.7; }
+        @font-face {
+            font-family: 'TT Ramillas';
+            src: url('fonts/TT-Ramillas-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        h1, h2, h3 { font-family: 'TT Ramillas', 'Bebas Neue', sans-serif; font-weight: 300; color: #ffffff; letter-spacing: 1px; }
+        h1 { font-size: 2.7em; } h2 { font-size: 2.1em; } h3 { font-size: 1.15em; }
+        .utility-bar { background: #081828; color: #9ca3af; padding: 12px 0; font-size: 15px; text-align: center; }
+        .utility-bar a { color: #7ecbe1; text-decoration: none; }
+        .main-header { background: #ffffff; padding: 0; }
+        .logo-section { text-align: center; padding: 0; background: #ffffff; }
+        .logo-section img { max-width: 88%; height: auto; max-height: 135px; vertical-align: bottom; }
+
+        nav { background: #081828; padding: 12px 0; }
+        nav .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; gap: 35px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: #7ecbe1; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        .page-header { background: linear-gradient(90deg, #336666 0%, #3c8da0 100%); padding: 50px 0; text-align: center; }
+        .page-header h1 { font-size: 42px; margin-bottom: 12px; }
+        .page-header p { font-size: 16px; color: #d0d0d0; max-width: 700px; margin: 0 auto; }
+        .products-section { padding: 60px 0; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, 220px); justify-content: center; gap: 30px; margin-top: 40px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .product-item { background: #081828; border: 1px solid #164755; border-radius: 8px; padding: 20px; text-align: center; transition: transform 0.3s, border-color 0.3s; cursor: pointer; width: 220px; min-width: 220px; max-width: 220px; box-sizing: border-box; }
+        .product-item:hover { transform: translateY(-5px); border-color: #7ecbe1; }
+        .product-item .img-container { width: 180px; height: 180px; margin: 0 auto 15px; overflow: hidden; border-radius: 6px; background: #081828; position: relative; }
+        .product-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; transition: transform 0.3s ease; }
+        .product-item:hover img { transform: scale(1.25); }
+        .product-item h3 { font-size: 16px; margin-bottom: 8px; color: #ffffff; font-weight: 600; }
+        .product-item .price { font-size: 18px; color: #7ecbe1; font-weight: 700; margin-bottom: 10px; }
+        .add-to-cart { background: #d0d0d0; color: #333333; border: none; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; width: auto; }
+        .add-to-cart:hover { background: #c0c0c0; }
+        .img-container { cursor: pointer; }
+        .img-container.show-hint::after {
+            content: "Click again to add to cart";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        footer { background: #081828; text-align: center; padding: 25px; color: #6b7280; font-size: 13px; margin-top: 60px; }
+        @media (max-width: 992px) {
+
+            .page-header h1 { font-size: 32px; }
+            .product-grid { gap: 20px; }
+            .product-item { flex: 0 0 180px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="utility-bar">🚛 Free Shipping On Orders Over $99! | <a href="tel:800-555-GRAM">Call Us: 800-555-GRAM</a></div>
+    <div class="main-header">
+        <div class="logo-section"><a href="index.html"><img src="FSbannerb.png" alt="Frac Stacker"></a></div>
+    </div>
+    <nav>
+        <div class="container-wide">
+            <a href="index.html">Home</a><a href="collections.html" class="active">Collections</a><a href="#deals">Deals</a><a href="#club">Monthly Club</a><a href="#gift">Send a Gram</a><a href="index.html#about">About</a><a href="#">Sign In</a><a href="#">Cart (0)</a>
+        </div>
+    </nav>
+    <div class="page-header">
+        <div class="container">
+            <h1>1 Gram Collection</h1>
+            <p>Over 40 designs and sets to choose from with more on the way. Roughly 3/8" diameter X 1/16" thick (9.5 mm X 1.5 mm)</p>
+            <img src="images/1gram-size.png" alt="1 Gram size reference" style="margin-top: 20px; max-width: 400px; width: 90%; border-radius: 8px;">
+        </div>
+    </div>
+    <div class="container"><div class="products-section"><div class="product-grid">
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/transformersset.jpg" alt="Transformer Set"></div>
+                    <h3>Transformer Set</h3>
+                    <div class="price">$13.00</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/marioset.jpg" alt="8-Bit Mario-Bros Set"></div>
+                    <h3>8-Bit Mario-Bros Set</h3>
+                    <div class="price">$19.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/pacmanset.jpg" alt="8-Bit Pac-Man Set"></div>
+                    <h3>8-Bit Pac-Man Set</h3>
+                    <div class="price">$26.00</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/2Agram.jpg" alt="2A Gram"></div>
+                    <h3>2A Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/dovegram.jpg" alt="Dove Gram"></div>
+                    <h3>Dove Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Ace-o-spadesgram.jpg" alt="Ace-o-Spades Gram"></div>
+                    <h3>Ace-o-Spades Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Anarchygram.jpg" alt="Anarchy Gram"></div>
+                    <h3>Anarchy Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Angelgram.jpg" alt="Angel Gram"></div>
+                    <h3>Angel Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/batgram.jpg" alt="Bat Gram"></div>
+                    <h3>Bat Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/beegram.jpg" alt="Bee Gram"></div>
+                    <h3>Bee Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/beertoken.jpg" alt="Beer Token"></div>
+                    <h3>Beer Token</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/centaurgram.jpg" alt="Centaur Gram"></div>
+                    <h3>Centaur Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/dollargram.jpg" alt="Dollar Gram"></div>
+                    <h3>Dollar Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/eaglegram.jpg" alt="Eagle Gram"></div>
+                    <h3>Eagle Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/starryeyedgram.jpg" alt="Starryeyed Gram"></div>
+                    <h3>Starryeyed Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/indiangram.jpg" alt="Indian Gram"></div>
+                    <h3>Indian Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/invadergram.jpg" alt="Invader Gram"></div>
+                    <h3>Invader Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Lanterngram.jpg" alt="Lantern Gram"></div>
+                    <h3>Lantern Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/liongram.jpg" alt="Lion Gram"></div>
+                    <h3>Lion Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Lizardgram.jpg" alt="Lizard Gram"></div>
+                    <h3>Lizard Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/luckygram.jpg" alt="Lucky Gram"></div>
+                    <h3>Lucky Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/pirategram.jpg" alt="Pirate Gram"></div>
+                    <h3>Pirate Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Skullgram.jpg" alt="Skull Gram"></div>
+                    <h3>Skull Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/weedgram.jpg" alt="Weed Gram"></div>
+                    <h3>Weed Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/toothfairy.jpg" alt="Tooth Fairy Gram"></div>
+                    <h3>Tooth Fairy Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/SucessEmoji.jpg" alt="Success Emoji Gram"></div>
+                    <h3>Success Emoji Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/vacationgram.jpg" alt="Vacation Gram"></div>
+                    <h3>Vacation Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/CurioBullion.jpg" alt="Curio Bullion Gram"></div>
+                    <h3>Curio Bullion Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Supergram.jpg" alt="Super Gram"></div>
+                    <h3>Super Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/zcashgram.jpg" alt="Zcash Gram"></div>
+                    <h3>Zcash Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Bitcoingram.jpg" alt="Bitcoin Gram"></div>
+                    <h3>Bitcoin Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/XRPgram.jpg" alt="XRP Gram"></div>
+                    <h3>XRP Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Cardanogram.jpg" alt="Cardano Gram"></div>
+                    <h3>Cardano Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Monerogram.jpg" alt="Monero Gram"></div>
+                    <h3>Monero Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Ethereumgram.jpg" alt="Ethereum Gram"></div>
+                    <h3>Ethereum Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Litecoingram.jpg" alt="Litecoin Gram"></div>
+                    <h3>Litecoin Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/dogegram.jpg" alt="Doge Gram"></div>
+                    <h3>Doge Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Ripplegram.jpg" alt="Ripple Gram"></div>
+                    <h3>Ripple Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/solanagram.jpg" alt="Solana Gram"></div>
+                    <h3>Solana Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/stellargram.jpg" alt="Stellar Gram"></div>
+                    <h3>Stellar Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/TronGram.jpg" alt="Tron Gram"></div>
+                    <h3>Tron Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-item">
+                    <div class="img-container"><img src="images/1gram/Tethergram.jpg" alt="Tether Gram"></div>
+                    <h3>Tether Gram</h3>
+                    <div class="price">$6.50</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div></div></div>
+    <footer><p>&copy; 2026 Frac Stacker. All rights reserved. | <a href="collections.html" style="color: #5eb3d1; text-decoration: none;">Back to Collections</a></p></footer>
+    <script>
+        document.querySelectorAll('.img-container').forEach(container => {
+            container.addEventListener('click', function(e) {
+                if (e.target.closest('.add-to-cart')) return;
+                document.querySelectorAll('.img-container').forEach(c => {
+                    if (c !== this) c.classList.remove('show-hint');
+                });
+                this.classList.toggle('show-hint');
+                setTimeout(() => {
+                    this.classList.remove('show-hint');
+                }, 3000);
+            });
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.img-container')) {
+                document.querySelectorAll('.img-container').forEach(c => {
+                    c.classList.remove('show-hint');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
